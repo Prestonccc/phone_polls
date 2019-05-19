@@ -1,0 +1,217 @@
+body {
+    height: 100%;
+}
+
+.head {
+    background-color: #3a5c61;
+    position: relative;
+    height: auto;
+    min-height: 8vh;
+    color: white;
+}
+
+.head p {
+    font-size: 20px;
+    font-weight: bolder;
+    padding-top: 2vh;
+    margin-bottom: 0;
+}
+
+.head a {
+    color: white;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.head-left {
+    float: left;
+    display: inline-block;
+    width: 70%;
+}
+
+.head-right {
+    float: right;
+    display: inline-block;
+    padding-top: 2vh;
+    width: auto;
+}
+
+.head-right a {
+    display: inline-block;
+    color: white;
+    font-size: 16px;
+    margin-right: 1vw;
+}
+
+.post {
+    margin-top: 1vh;
+}
+
+.posts {
+    max-height: 65%;
+    height: 60%;
+    overflow-y: scroll;
+}
+
+.user {
+    margin-top: 2vh;
+    height: 73%;
+    position: relative;
+    margin-bottom: 2vh;
+}
+
+.no-padding-bottom-p {
+    margin-bottom: 0;
+}
+
+.radio-inline {
+    margin-top: 0;
+}
+
+.foot {
+    height: 15vh;
+    background-color: #3a5c61;
+    /*margin-top: 2vh;*/
+    width: 100%;
+    position: relative;
+    bottom:0;
+    left:0;
+    right: 0;
+    /*overflow: hidden;*/
+}
+
+.foot p {
+    font-size: 20px;
+    color: white;
+    font-weight: bolder;
+}
+
+.foot-left {
+    float: left;
+    display: inline-block;
+}
+
+.foot-left p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.foot-left label {
+    color: papayawhip;
+    display: block;
+    margin: 0;
+}
+
+.foot-right {
+    float: right;
+    display: inline-block;
+}
+
+.foot-right p {
+    font-size: 18px;
+    color: white;
+    font-weight: bolder;
+}
+
+#time {
+    margin-left: 1vw;
+    margin-bottom: 0;
+}
+
+.home {
+    height: 75%;
+    position: relative;
+    margin-bottom: 2vh;
+}
+
+.home-left {
+    height: 100%;
+    width: 70%;
+    /*background-color: #2aabd2;*/
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    padding-top: 4vh;
+    display: inline-block;
+}
+
+.home-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bolder;
+    display: block;
+    margin-bottom: 2vh;
+}
+
+.home-right {
+    height: 100%;
+    width: 30%;
+    /*background-color: #5cb85c;*/
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    padding: 0;
+    display: inline-block;
+}
+
+.height-100 {
+    height: 100%;
+}
+
+.poll {
+    max-height: 80%;
+    border: 1px solid;
+}
+
+#vote {
+    margin-top: 1vh;
+}
+
+#bar {
+    margin-top: 1vh;
+    margin-left: 1vw;
+}
+
+#pie {
+    margin-top: 1vh;
+
+}
+
+.post-list {
+    width: 100%;
+    height: 75%;
+    border-bottom: 1px solid;
+    padding: 3vh;
+    overflow-y: scroll;
+}
+
+.post-post {
+    width: 100%;
+    height: 25%;
+    /*background-color: #5cb85c;*/
+    padding: 1vh;
+}
+
+.post-text {
+    height: 65%;
+}
+
+.post-button {
+    margin-top: 1vh;
+}
+
+#anonymous {
+    margin: 0 0 0 2vw;
+}
+
+#anonymous + label {
+    margin-right: 5vw;
+    margin-left: 1vw;
+}
+
+#post_text {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}

@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container home">
+        <div class="col-md-8 home-left">
+                <div class="home-title">
+                    <p>Phone Polls</p>
+                </div>
+                <div class="poll">
+                    <canvas id="polls"></canvas>
+                </div>
+                <div class="">
+                    <button class="btn-info" type="button" id="vote">Take Vote</button>
+                    <button class="btn-info" type="button" id="bar" style="float: right;">Bar</button>
+                    <button class="btn-info" type="button" id="pie" style="float: right;">Pie</button>
+                </div>
+            </div>
+            <div class="col-md-4 home-right">
+                <div class="post-list">
+                    {% for i in data.all_posts %}
+                        <p>{{ i.author.username }} says: {{ i.body }}</p>
+                    {% endfor %}
+                </div>
+                <div class="post-post">
+                    <div class="post-text">
+                        <textarea type="text" name="post_text" id="post_text" style="text-align: left"></textarea>
+                    </div>
+                    <div class="post-button">
+                        <input type="checkbox" name="anonymous" id="anonymous"><label>anonymous</label>
+                        <button class="btn btn-info" type="button" id="post">Post</button>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+    </div>
+    <script src={{ url_for('static', filename='js/jquery-3.4.1.min.js') }}></script>
+    <script src={{ url_for('static', filename='layer/layer.js') }}></script>
+    <script src={{ url_for('static', filename='js/chart.js') }}></script>
+    <script rel="script">
+        {% for msg in get_flashed_messages(category_filter=['yes'])  %}
+            layer.msg('{{ msg }}');
+        {% endfor %}
+        let poll = $("#polls");
+        let all_phone_name = new Array();
+        {% for i in data['all_phone_name'] %}
+            all_phone_name.push("{{ i }}");
+        {% endfor %}
+        let data = new Array();
+        {% for i in data['all_phone_data'] %}
+            data.push({{ i }});
+        {% endfor %}
+        var myChart = new Chart(poll, {
+            type: 'horizontalBar',
+            data: {
+                labels: all_phone_name,
+                datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            '#1b3329',
+                            '#65b65d',
+                            "#5f8018"
+                        ],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    position: 'top',
+                    text: 'Votes of Phone'
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            max: Math.max.apply(null, data)+3,
+                            min: 0,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                legend: {
+                    display: false,
+                    position: 'bottom',
+
+                }
+            }
+        });
+
+        $("#pie").click(function () {
+            myChart.destroy();
+            {#let temp_data = JSON.parse(JSON.stringify(data));#}
+            {#temp_data.pop(Math.max.apply(null, temp_data)+3);#}
+            myChart = new Chart(poll, {
+            type: 'pie',
+            data: {
+                labels: all_phone_name,
+                datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            '#1b3329',
+                            '#65b65d',
+                            "#5f8018"
+                        ],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    position: 'top',
+                    text: 'Votes of Phone'
+                },
+            }
+        });
+
+        });
+
+        $("#bar").click(function () {
+            myChart.destroy();
+            myChart = new Chart(poll, {
+            type: 'horizontalBar',
+            data: {
+                labels: all_phone_name,
+                datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            '#1b3329',
+                            '#65b65d',
+                            "#5f8018"
+                        ],
+                        borderWidth: 1
+                    },
+                ]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    position: 'top',
+                    text: 'Votes of Phone'
+                },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            max: Math.max.apply(null, data)+3,
+                            min: 0,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                legend: {
+                    display: false,
+                    position: 'bottom',
+
+                }
+            }
+        });
+        });
+
+        $("#post").click(function () {
+            let anonymous = $("#anonymous").prop('checked');
+            let login = $(".head-right").find('a')[2];
+            let post_text = $("#post_text").val();
+            login = $(login).html();
+            if (login === 'Admin') {
+                layer.msg('You are not logged in, please login.');
+                return;
+            }
+            if (post_text === '') {
+                layer.msg('Please enter a comment');
+                return;
+            }
+            let data = {
+                'anonymous': anonymous,
+                'body': post_text
+            };
+            $.ajax({
+                url: '/post',
+                data: data,
+                method: 'POST',
+                success: function (data) {
+                    layer.msg(data['message']);
+                    $.ajax({
+                        url: '/post',
+                        method: 'GET',
+                        success: function (data) {
+                            let post_list = $(".post-list");
+                            $(post_list).empty();
+                            $(data).map((index, data) => {
+                                let html = '<p>'+data['author']+' says: '+data['body']+'</p>';
+                                $(post_list).append(html);
+                            })
+                        }
+                    });
+                }
+            })
+        });
+
+        $("#vote").click(function () {
+            window.location.href = '/index';
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,85 @@
+<html>
+<head>
+    {% if title %}
+        <title>{{ title }} - Phone Polls</title>
+    {% else %}
+        <title>Phone Polls</title>
+    {% endif %}
+    <link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.min.css') }}>
+    <link rel="stylesheet" href={{ url_for('static', filename='css/common.css') }}>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<div style="min-height: 100%;">
+    <div class="container-fluid">
+        <div class="row head">
+            <div class="col-md-9 head-left">
+                <a href="{{ url_for('home') }}"><p class="inline col-md-10">Phone Polls</p></a>
+            </div>
+            <div class="col-md-3 head-right">
+                <a href="{{ url_for('home') }}">Home</a>
+                {% if current_user.is_anonymous %}
+                    <a href="{{ url_for('login') }}" name="login">Login</a>
+                    <a href="{{ url_for('login_admin') }}">Admin</a>
+                {% else %}
+                    <a href="{{ url_for('user', username=current_user.username) }}" name="profile">Profile</a>
+                    <a href="{{ url_for('logout') }}" name="logout">Logout</a>
+                {% endif %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {#        {% with messages = get_flashed_messages() %}#}
+    {#        {% if messages %}#}
+    {#        <ul>#}
+    {#            {% for message in messages %}#}
+    {#            <li>{{ message }}</li>#}
+    {#            {% endfor %}#}
+    {#        </ul>#}
+    {#        {% endif %}#}
+    {#        {% endwith %}#}
+    {#        <div class="container-fluid">#}
+    {#            #}
+    {#        </div>#}
+    {% block content %}{% endblock %}
+    {% block footer %}
+        <div class="container-fluid foot">
+            <div class="col-md-8 foot-left">
+                <p>Website Details</p>
+                <label>This multi-user web application is written in HTML, CSS, Flask, AJAX, JQuery, and Bootstrap. The
+                    application performs phone polls - the most popular released phone model using first past the post
+                    voting.</label>
+                <label>@Phone Polls 2019</label>
+                <label>@Hu CHEN & Chenggong ZHANG</label>
+            </div>
+            <div class="col-md-4 foot-right">
+                <div class="foot-right">
+                    <p>Current Time:<label id="time"></label></p>
+                    {% if last_seen %}
+                        <p>Last Login Time: {{ last_seen }}</p>
+                    {% else %}
+                        <p>Last Login Time: Please Login</p>
+                    {% endif %}
+                    <p>User: {{ data.username }}</p>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</div>
+
+<script src={{ url_for('static', filename='js/jquery-3.4.1.min.js') }}></script>
+<script>
+    function changeNowTime() {
+        let time = new Date();
+        $("#time").text(' ' + time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() + ' ' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds());
+    }
+
+    $(document).ready(function () {
+        setInterval(changeNowTime, 100);
+    });
+
+</script>
+
+</body>
+</html>

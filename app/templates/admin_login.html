@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <title>Admin Login System</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href={{ url_for('static', filename='css/login.css') }}>
+{% endblock %}
+{% block content %}
+    <div class="login-parent-box">
+        <div class="login-box">
+            <h1>Admin Login</h1>
+            <form action="" method="post" novalidate>
+                <div class="textbox">
+                    <i class="fas fa-user-cog"></i>
+                    <input type="text" placeholder="Username" id="username" name="username">
+                </div>
+                <div class="textbox">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" id="password" name="password">
+                </div>
+                <button class="btn" type="submit" id="admin_login">Sign in</button>
+            </form>
+        </div>
+    </div>
+    <script src={{ url_for('static', filename='js/jquery-3.4.1.min.js') }}></script>
+    <script src={{ url_for('static', filename='layer/layer.js') }}></script>
+    <script>
+        {% for msg in get_flashed_messages(category_filter=['no'])  %}
+            layer.msg('{{ msg }}');
+        {% endfor %}
+    </script>
+{% endblock %}

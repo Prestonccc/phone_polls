@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href={{ url_for('static', filename='css/index.css') }}>
+    <div class="container index">
+        <div align="center"><img class="cartoon" src={{ url_for('static', filename='image/cartoon.png') }}/></div>
+        <div>
+        <h4 align="center">PHONE POLLS</h4>
+            <div id="main" style="height: 67%;overflow-y: scroll;padding-left: 10vw;padding-right: 10vw">
+                    {% for phone in phones %}
+                    <div>
+                        <input class="radio-inline" type="radio" name="radio" value="{{ phone.id }}"/>
+                        <p class="inline no-padding-bottom-p">{{ phone.p_name }}</p>
+                    </div>
+                    <div style="margin-top: 1vh">
+                        <div style="width: 90%;" class="inline">
+                            <div id=0 style="background-color:#acd6ff; width:0px; height:20px; border-width:0px;"></div>
+                        </div>
+                        <label class="number" id="label0">{{ phone.vote_number }}</label> votes
+                    </div>
+                {% endfor %}
+                <button class="btn btn-info" type="submit" id="submit">CONFIRM VOTE</button>
+            </div>
+	    </div>
+    </div>
+    <script src={{ url_for('static', filename='js/jquery-3.4.1.min.js') }}></script>
+    <script src={{ url_for('static', filename='layer/layer.js') }}></script>
+    <script rel="script">
+        function vote() {
+            let vote = $("input[name='radio']:checked").val();
+            let data = {
+                'user_id': {{ user_id }},
+                'phone_id': vote
+            };
+            $.ajax({
+                url: '/vote',
+                data: data,
+                method: 'POST',
+                success: function (data) {
+                    if (data['code'] === '200') {
+                        window.location.href = '/home';
+                    }
+                }
+            })
+        }
+
+        function vote_t() {
+            $(".number").map((index, vote) => {
+                let number = $(vote).html();
+                let bar = $(vote).prev('div').children('div')[0];
+                for(let i=0;i<Number(number);i++) {
+                    let width = $(bar).css('width');
+                    width = parseInt(width);
+                    width += 1;
+                    $(bar).css('width', width+'vw');
+                }
+            })
+        }
+
+        vote_t();
+        $("#submit").click(vote);
+    </script>
+{% endblock %}
