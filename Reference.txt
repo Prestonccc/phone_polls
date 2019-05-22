@@ -6,7 +6,8 @@
 \paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\b\fs28 \cf0 Reference
+\f0\b\fs28 \cf0 Reference\
+
 \f1\b0\fs24 \
 image:\
 cartoon.png\
@@ -18,7 +19,7 @@ Available from: https://www.kisscc0.com/clipart/smartphone-iphone-cartoon-teleph
 back.jpg\
 \pard\pardeftab720\sl280\partightenfactor0
 \cf2 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec3 Available from: https://www.shutterstock.com/video/clip-23199817-dark-blue-tech-circuit-board-technology-animated\
+Available from: https://www.shutterstock.com/video/clip-23199817-dark-blue-tech-circuit-board-technology-animated\
 \
 Javascript:\
 chart js\
